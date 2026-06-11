@@ -9,7 +9,9 @@ inat_metadata(obs, path = "inat_metadata.csv", extra_cols = NULL)
 \arguments{
 \item{obs}{Data frame returned by \code{\link[=inat_fetch]{inat_fetch()}}.}
 
-\item{path}{Character. Output CSV file path. Default \code{"inat_metadata.csv"}.}
+\item{path}{Character. Output CSV file path. Default \code{"inat_metadata.csv"}.
+To save alongside downloaded photos, use
+\code{path = file.path(out_dir, "metadata.csv")}.}
 
 \item{extra_cols}{Character vector of additional column names from \code{obs} to
 include, if present.}
@@ -19,13 +21,22 @@ Invisibly returns the metadata data frame.
 }
 \description{
 Extracts key fields from observations returned by \code{\link[=inat_fetch]{inat_fetch()}} and writes
-them to a CSV file.
+them to a CSV file. Use \code{path} to save the CSV in the same folder as your
+downloaded photos.
+}
+\note{
+The \code{common_name} column reflects iNaturalist's \code{preferred_common_name},
+which is typically in English but may vary depending on the taxon and
+iNaturalist's locale settings.
 }
 \examples{
 \dontrun{
 obs <- inat_fetch(taxon_id = 488444, place_id = 6783,
                   user_login = "someuser")
-inat_metadata(obs, path = "chuquitensis_bolivia.csv")
+
+# Save photos and metadata to the same folder
+inat_download(obs, out_dir = "my_photos")
+inat_metadata(obs, path = file.path("my_photos", "metadata.csv"))
 }
 
 }

@@ -26,9 +26,11 @@ Bolivia).}
 
 \item{user_login}{Character or \code{NULL}. iNaturalist username.}
 
-\item{annotation}{Character label or integer vector \code{c(term_id, term_value_id)} or \code{NULL}. Filter by a single annotation. Use a label
-from \link{inat_annotations} (e.g. \code{"flowers"}, \code{"fruit"}, \code{"alive"},
-\code{"adult"}, \code{"female"}) or pass raw IDs directly as \code{c(12L, 13L)}.
+\item{annotation}{Character vector of annotation labels, or a single integer
+vector \code{c(term_id, term_value_id)}, or \code{NULL}. Use labels from
+\link{inat_annotations} (e.g. \code{"flowers"}, \code{"green_leaves"}, \code{"alive"}).
+Multiple labels can be passed as \code{c("flowers", "green_leaves")} — each
+is fetched separately and results are combined.
 See \link{inat_annotations} for all valid labels.}
 
 \item{quality_grade}{Character. One of \code{"research"}, \code{"needs_id"}, or
@@ -50,16 +52,18 @@ A data frame of observations with list-column \code{photos}.
 }
 \description{
 Retrieves all observations matching the given filters, handling pagination
-automatically.
+automatically. Multiple annotations can be passed as a character vector;
+each is fetched separately and the results combined.
 }
 \examples{
 \dontrun{
-# Observations with open flowers
+# Single annotation
 obs <- inat_fetch(taxon_id = 488444, place_id = 6783,
                   annotation = "flowers")
 
-# Using raw IDs
-obs <- inat_fetch(taxon_id = 488444, annotation = c(12L, 13L))
+# Multiple annotations
+obs <- inat_fetch(taxon_id = 51935, place_id = 6857,
+                  annotation = c("flowers", "green_leaves"))
 
 # See all available annotation labels
 inat_annotations

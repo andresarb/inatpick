@@ -8,11 +8,12 @@
 \description{
 A lightweight interface to the iNaturalist API for downloading observation
 photos and exporting metadata to CSV. Supports filtering by taxon, place,
-and user.
+user, and annotation.
 }
 \details{
 The main workflow:
 \enumerate{
+\item \code{\link[=inat_search_taxon]{inat_search_taxon()}} / \code{\link[=inat_search_place]{inat_search_place()}} — find taxon and place IDs
 \item \code{\link[=inat_fetch]{inat_fetch()}} — retrieve observations from the API
 \item \code{\link[=inat_download]{inat_download()}} — download photos to a local folder
 \item \code{\link[=inat_metadata]{inat_metadata()}} — export observation metadata to CSV
@@ -22,6 +23,7 @@ The main workflow:
 Useful links:
 \itemize{
   \item \url{https://github.com/andresarb/inatpick}
+  \item \url{https://andresarb.github.io/inatpick}
   \item Report bugs at \url{https://github.com/andresarb/inatpick/issues}
 }
 

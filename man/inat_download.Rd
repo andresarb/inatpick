@@ -8,6 +8,7 @@ inat_download(
   obs,
   out_dir = "inat_photos",
   size = "large",
+  metadata = TRUE,
   overwrite = FALSE,
   verbose = TRUE
 )
@@ -15,12 +16,16 @@ inat_download(
 \arguments{
 \item{obs}{Data frame returned by \code{\link[=inat_fetch]{inat_fetch()}}.}
 
-\item{out_dir}{Character. Directory to save images. Created if it does not
-exist.}
+\item{out_dir}{Character. Directory to save images and metadata. Created if
+it does not exist. Default \code{"inat_photos"}.}
 
 \item{size}{Character. Photo size: \code{"square"} (75px), \code{"small"} (240px),
 \code{"medium"} (500px), \code{"large"} (1024px), or \code{"original"}. Default
-\code{"large"}.}
+\code{"large"}. The size is appended to the filename (e.g.
+\code{obs123_456_large.jpg}).}
+
+\item{metadata}{Logical. If \code{TRUE} (default), automatically saves a
+\code{metadata.csv} file to \code{out_dir} alongside the downloaded photos.}
 
 \item{overwrite}{Logical. Re-download files that already exist (default
 \code{FALSE}).}
@@ -31,13 +36,19 @@ exist.}
 Invisibly returns a data frame of photo URLs and local file paths.
 }
 \description{
-Downloads all photos from a data frame returned by \code{\link[=inat_fetch]{inat_fetch()}}.
+Downloads all photos from a data frame returned by \code{\link[=inat_fetch]{inat_fetch()}}, and
+optionally saves observation metadata to a CSV file in the same folder.
 }
 \examples{
 \dontrun{
 obs <- inat_fetch(taxon_id = 488444, place_id = 6783,
                   user_login = "someuser")
+
+# Download photos and save metadata.csv to the same folder
 inat_download(obs, out_dir = "my_photos")
+
+# Download photos only, no metadata
+inat_download(obs, out_dir = "my_photos", metadata = FALSE)
 }
 
 }
