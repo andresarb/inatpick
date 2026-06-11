@@ -23,7 +23,7 @@ The main workflow:
 Useful links:
 \itemize{
   \item \url{https://github.com/andresarb/inatpick}
-  \item \url{https://andresarb.github.io/inatpick}
+  \item \url{https://andresarb.github.io/inatpick/}
   \item Report bugs at \url{https://github.com/andresarb/inatpick/issues}
 }
 

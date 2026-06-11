@@ -1,3 +1,9 @@
+# inatpick 0.2.1
+
+## Bug fixes
+- Fixed URL in DESCRIPTION (added trailing slash to pkgdown site URL)
+- Added iNaturalist to spell-check whitelist
+
 # inatpick 0.2.0
 
 ## New functions
