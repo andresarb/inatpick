@@ -1,0 +1,144 @@
+---
+title: "Getting started with inatpick"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with inatpick}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  comment   = "#>",
+  eval      = FALSE
+)
+```
+
+## Overview
+
+`inatpick` provides a simple workflow for downloading photos and metadata
+from [iNaturalist](https://www.inaturalist.org) via its API. The three main
+functions are:
+
+| Function | Description |
+|---|---|
+| `inat_fetch()` | Fetch observations from the API |
+| `inat_download()` | Download photos to a local folder |
+| `inat_metadata()` | Export observation metadata to CSV |
+
+```{r}
+library(inatpick)
+```
+
+---
+
+## Example: *Drosera rotundifolia* in the United Kingdom
+
+In this example we download all observations of the round-leaved sundew
+(*Drosera rotundifolia*, taxon ID `52658`) recorded in the United Kingdom
+(place ID `6857`) by iNaturalist user
+[andresrb](https://www.inaturalist.org/people/andresrb).
+
+### Step 1 — Fetch observations
+
+```{r}
+obs <- inat_fetch(
+  taxon_id   = 52658,      # Drosera rotundifolia
+  place_id   = 6857,       # United Kingdom
+  user_login = "andresrb"
+)
+
+nrow(obs)  # how many observations?
+```
+
+### Step 2 — Filter by annotation
+
+To focus only on observations where flowers are visible, use the `annotation`
+argument. Run `inat_annotations` to see all available options.
+
+```{r}
+# See all annotation labels
+inat_annotations
+
+# Fetch only flowering observations
+obs_flowering <- inat_fetch(
+  taxon_id   = 52658,
+  place_id   = 6857,
+  user_login = "andresrb",
+  annotation = "flowers"
+)
+```
+
+### Step 3 — Download photos
+
+Download photos to a local folder. The `size` argument controls resolution:
+`"square"` (75px), `"small"` (240px), `"medium"` (500px), `"large"` (1024px,
+default), or `"original"`.
+
+```{r}
+inat_download(
+  obs,
+  out_dir = "drosera_photos",
+  size    = "large"
+)
+```
+
+Files are named `obs{observation_id}_{photo_id}.jpg` and saved to the
+specified folder. Already-downloaded files are skipped by default
+(`overwrite = FALSE`).
+
+### Step 4 — Export metadata to CSV
+
+```{r}
+inat_metadata(
+  obs,
+  path = "drosera_rotundifolia_uk.csv"
+)
+```
+
+The CSV includes observation ID, date, taxon name, observer, place, 
+coordinates, and number of photos.
+
+---
+
+## Finding taxon and place IDs
+
+IDs are visible directly in iNaturalist URLs:
+
+- **Taxon ID**: `inaturalist.org/taxa/52658-Drosera-rotundifolia` → `52658`
+- **Place ID**: `inaturalist.org/observations?place_id=6857` → `6857`
+
+---
+
+## Photo licenses
+
+Photos downloaded from iNaturalist retain their original licenses as set
+by individual observers (CC0, CC-BY, CC-BY-NC, etc.). Use
+`licensed = TRUE` in `inat_fetch()` to restrict to CC-licensed photos only.
+Always credit the observer and respect the license terms when using images
+in research or publication.
+
+```{r}
+# Only CC-licensed observations
+obs_cc <- inat_fetch(
+  taxon_id = 52658,
+  place_id = 6857,
+  licensed = TRUE
+)
+```
+
+---
+
+## Further filtering options
+
+```{r}
+# Research-grade only, flowering, in July
+obs_july <- inat_fetch(
+  taxon_id      = 52658,
+  place_id      = 6857,
+  annotation    = "flowers",
+  quality_grade = "research",
+  month         = 7
+)
+```
