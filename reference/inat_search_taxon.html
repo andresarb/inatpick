@@ -58,7 +58,7 @@ to pass to <code><a href="inat_fetch.html">inat_fetch()</a></code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">inat_search_taxon</span><span class="op">(</span><span class="va">name</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">inat_search_taxon</span><span class="op">(</span><span class="va">name</span>, rank <span class="op">=</span> <span class="cn">NULL</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -67,6 +67,11 @@ to pass to <code><a href="inat_fetch.html">inat_fetch()</a></code>.</p>
 
 <dl><dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
 <dd><p>Character. Taxon name to search (common or scientific).</p></dd>
+
+
+<dt id="arg-rank">rank<a class="anchor" aria-label="anchor" href="#arg-rank"></a></dt>
+<dd><p>Character or <code>NULL</code>. Filter results by taxonomic rank, e.g.
+<code>"genus"</code>, <code>"species"</code>, <code>"family"</code>. Default <code>NULL</code> returns all ranks.</p></dd>
 
 
 <dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
@@ -89,7 +94,8 @@ iNaturalist's locale settings.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="fu">inat_search_taxon</span><span class="op">(</span><span class="st">"Drosera rotundifolia"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">inat_search_taxon</span><span class="op">(</span><span class="st">"sundew"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">inat_search_taxon</span><span class="op">(</span><span class="st">"Drosera"</span>, rank <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">inat_search_taxon</span><span class="op">(</span><span class="st">"sundew"</span>, rank <span class="op">=</span> <span class="st">"species"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

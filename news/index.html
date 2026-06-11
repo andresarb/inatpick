@@ -55,17 +55,24 @@
 <div class="section level3">
 <h3 id="new-functions-0-2-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-2-0"></a></h3>
 <ul><li>
-<code><a href="../reference/inat_search_taxon.html">inat_search_taxon()</a></code> — search for a taxon by name and retrieve its ID</li>
+<code><a href="../reference/inat_search_taxon.html">inat_search_taxon()</a></code> — search for a taxon by name and retrieve its ID; includes optional <code>rank</code> argument to filter by taxonomic level</li>
 <li>
 <code><a href="../reference/inat_search_place.html">inat_search_place()</a></code> — search for a place by name and retrieve its ID</li>
 </ul></div>
 <div class="section level3">
 <h3 id="improvements-0-2-0">Improvements<a class="anchor" aria-label="anchor" href="#improvements-0-2-0"></a></h3>
 <ul><li>
-<code><a href="../reference/inat_download.html">inat_download()</a></code> and <code><a href="../reference/inat_metadata.html">inat_metadata()</a></code> now use the same <code>out_dir</code> convention, making it easy to save photos and CSV to the same folder</li>
+<code><a href="../reference/inat_fetch.html">inat_fetch()</a></code> now accepts multiple annotations as a character vector (e.g. <code>c("flowers", "green_leaves")</code>); each is fetched separately and results are combined with duplicates removed</li>
+<li>
+<code><a href="../reference/inat_download.html">inat_download()</a></code> now saves <code>metadata.csv</code> automatically alongside photos by default (<code>metadata = TRUE</code>); use <code>metadata = FALSE</code> to skip</li>
+<li>
+<code><a href="../reference/inat_download.html">inat_download()</a></code> file names now include the size suffix (e.g. <code>obs123_456_large.jpg</code>)</li>
+<li>
+<code><a href="../reference/inat_download.html">inat_download()</a></code> prints the full output path after downloading</li>
 <li>
 <code><a href="../reference/inat_metadata.html">inat_metadata()</a></code> column names cleaned up: <code>taxon</code>, <code>common_name</code>, <code>user</code>, <code>user_name</code>, <code>place</code>, <code>url</code> instead of raw API names</li>
 <li>Fixed <code>num_photos</code> bug in <code><a href="../reference/inat_metadata.html">inat_metadata()</a></code> that was counting fields instead of photos</li>
+<li>Added startup message on <code><a href="https://github.com/andresarb/inatpick" class="external-link">library(inatpick)</a></code> with workflow overview</li>
 <li>Added note on <code>common_name</code> locale in <code><a href="../reference/inat_search_taxon.html">inat_search_taxon()</a></code> and <code><a href="../reference/inat_metadata.html">inat_metadata()</a></code> documentation</li>
 </ul></div>
 </div>
